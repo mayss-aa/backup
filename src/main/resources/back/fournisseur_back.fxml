@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.Controllers.back.FournisseurController">
+    <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="60" spacing="20" style="-fx-background-color: #2c3e50;">
+            <padding><Insets left="20.0" right="20.0" /></padding>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <ImageView fitHeight="32" fitWidth="32" preserveRatio="true">
+                    <image><Image url="@../Images/logo.png" /></image>
+                </ImageView>
+                <Text fill="white" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Admin Panel" />
+            </HBox>
+            <HBox alignment="CENTER" spacing="30">
+                <Button text="Dashboard" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-weight: bold;" />
+                <Button text="Produits" onAction="#produit" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-weight: bold;" />
+                <Button text="Categories" onAction="#categorie" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-weight: bold;" />
+                <Button text="Fournisseur" onAction="#fournisseur" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" />
+                <Button text="Utilisateurs" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-weight: bold;" />
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" spacing="10" HBox.hgrow="ALWAYS">
+                <Circle fill="#3498db" radius="20" />
+                <Label text="Admin" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" />
+                <Button text="Déconnexion" style="-fx-background-color: transparent; -fx-text-fill: white;">
+                    <graphic>
+                        <ImageView fitHeight="16" fitWidth="16" preserveRatio="true">
+                            <image><Image url="@../Images/logout.png" /></image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </HBox>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="20" style="-fx-background-color: #f5f6fa;">
+            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <Text fill="#2c3e50" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Gestion des Fournisseurs" />
+            </HBox>
+
+            <GridPane hgap="15" vgap="15">
+                <padding><Insets top="10" bottom="10" left="10" right="10"/></padding>
+
+                <Label text="Nom:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                <TextField fx:id="tfNom" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+                <Label text="Email:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                <TextField fx:id="tfEmail" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+                <Label text="Téléphone:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                <TextField fx:id="tfTelephone" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+
+                <Label text="Adresse:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                <TextField fx:id="tfAdresse" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+            </GridPane>
+
+            <TableView fx:id="fournisseurTable" prefHeight="235.0" prefWidth="845.0">
+                <columns>
+                    <TableColumn fx:id="colNom" text="Nom" />
+                    <TableColumn fx:id="colEmail" text="Email" />
+                    <TableColumn fx:id="colTelephone" text="Téléphone" />
+                    <TableColumn fx:id="colAdresse" text="Adresse" />
+                </columns>
+            </TableView>
+
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button fx:id="btnAdd" text="Ajouter" onAction="#handleAdd" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" prefWidth="100"/>
+                <Button fx:id="btnUpdate" text="Modifier" onAction="#handleUpdate" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" prefWidth="100"/>
+                <Button fx:id="btnDelete" text="Supprimer" onAction="#handleDelete" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" prefWidth="100"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
