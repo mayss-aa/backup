@@ -22,11 +22,11 @@ public class Role {
     }
 
     // Getters & Setters
-    public int getId() {
+    public int getrId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setrId(int id) {
         this.id = id;
     }
 

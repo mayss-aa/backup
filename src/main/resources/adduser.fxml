@@ -17,21 +17,21 @@
 
 <AnchorPane prefHeight="731.0" prefWidth="1266.0" style="-fx-background-color: #FFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddUser">
     <children>
-        <!-- Title -->
-        <Text fill="#0b4654" layoutX="151.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create new account">
+        <!-- Titre -->
+        <Text fill="#0b4654" layoutX="151.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer un nouveau compte">
             <font>
                 <Font name="FiraCode Nerd Font Bold" size="20.0" />
             </font>
         </Text>
 
-        <!-- First Name -->
+        <!-- Prénom -->
         <TextField fx:id="fname" alignment="CENTER" layoutX="129.0" layoutY="178.0" prefHeight="35.0" prefWidth="258.0" promptText="Prénom">
             <font>
                 <Font name="FiraCode Nerd Font Reg" size="14.0" />
             </font>
         </TextField>
 
-        <!-- Last Name -->
+        <!-- Nom -->
         <TextField fx:id="lname" alignment="CENTER" layoutX="129.0" layoutY="230.0" prefHeight="38.0" prefWidth="258.0" promptText="Nom">
             <font>
                 <Font name="FiraCode Nerd Font Reg" size="14.0" />
@@ -45,14 +45,14 @@
             </font>
         </TextField>
 
-        <!-- Password -->
-        <PasswordField id="passfield" fx:id="pass" alignment="CENTER" layoutX="129.0" layoutY="492.0" prefHeight="38.0" prefWidth="258.0" promptText="Mot De Passe">
+        <!-- Mot de passe -->
+        <PasswordField id="passfield" fx:id="pass" alignment="CENTER" layoutX="129.0" layoutY="492.0" prefHeight="38.0" prefWidth="258.0" promptText="Mot de passe">
             <font>
                 <Font name="FiraCode Nerd Font Reg" size="14.0" />
             </font>
         </PasswordField>
 
-        <!-- Sign Up Button -->
+        <!-- Bouton d'inscription -->
         <Button fx:id="singupbt" alignment="CENTER" layoutX="134.0" layoutY="545.0" mnemonicParsing="false" onAction="#singup" prefHeight="35.0" prefWidth="236.0" style="-fx-background-color: #07b263;" text="S'INSCRIRE" textFill="#ffffffc9">
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -62,8 +62,8 @@
             </font>
         </Button>
 
-        <!-- Already have an account? -->
-        <Text layoutX="141.0" layoutY="671.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Already have an account? ">
+        <!-- Déjà un compte ? -->
+        <Text layoutX="141.0" layoutY="671.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vous avez déjà un compte ? ">
             <font>
                 <Font name="FiraCode Nerd Font Reg" size="14.0" />
             </font>
@@ -73,24 +73,24 @@
                 <Font name="FiraCode Nerd Font Reg" size="14.0" />
             </font>
         </Hyperlink>
-        <Button layoutX="134.0" layoutY="608.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="236.0" style="-fx-background-color: #079af5;" text="S'INSCRIRE WITH GOOGLE" textFill="#ffffffc2">
+        <Button layoutX="134.0" layoutY="608.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="236.0" style="-fx-background-color: #079af5;" text="S'INSCRIRE AVEC GOOGLE" textFill="#ffffffc2">
             <font>
                 <Font name="FiraCode Nerd Font Bold" size="14.0" />
             </font>
         </Button>
         <Line endX="-9.0" layoutX="235.0" layoutY="596.0" startX="-100.0" stroke="#dadada" />
         <Line endX="5.0" layoutX="365.0" layoutY="596.0" startX="-85.0" stroke="#dadada" />
-        <Text fill="#dadada" layoutX="245.0" layoutY="601.0" strokeType="OUTSIDE" strokeWidth="0.0" text="or">
+        <Text fill="#dadada" layoutX="245.0" layoutY="601.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ou">
             <font>
                 <Font name="FiraCode Nerd Font Reg" size="14.0" />
             </font>
         </Text>
-        <TextField fx:id="phn" alignment="CENTER" layoutX="128.0" layoutY="330.0" prefHeight="38.0" prefWidth="258.0" promptText="Num Tel">
+        <TextField fx:id="phn" alignment="CENTER" layoutX="128.0" layoutY="330.0" prefHeight="38.0" prefWidth="258.0" promptText="Numéro de téléphone">
             <font>
                 <Font name="FiraCode Nerd Font Reg" size="14.0" />
             </font>
         </TextField>
-        <Text fill="#0b4654" layoutX="139.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="It’s quick and easy.">
+        <Text fill="#0b4654" layoutX="139.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C'est rapide et facile.">
             <font>
                 <Font name="FiraCode Nerd Font Reg" size="20.0" />
             </font>
@@ -102,16 +102,14 @@
                 <Image url="@Images/Signup.gif" />
             </image>
         </ImageView>
-        <Text fx:id="fnamev" fill="RED" layoutX="410.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-        <Text fx:id="lnamev" fill="RED" layoutX="399.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-        <Text fx:id="emailv" fill="RED" layoutX="399.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-        <Text fx:id="phonev" fill="RED" layoutX="399.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-        <Text fx:id="passwordv" fill="RED" layoutX="399.0" layoutY="511.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1.0" />
-      <DatePicker fx:id="daten" layoutX="128.0" layoutY="384.0" prefHeight="35.0" prefWidth="258.0" promptText="Date de naissance" />
-      <ChoiceBox fx:id="genrel" accessibleHelp="Femme" accessibleText="Homme" layoutX="127.0" layoutY="438.0" prefHeight="38.0" prefWidth="258.0" />
-      <Text fx:id="datenv" layoutX="410.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Text fx:id="genrev" layoutX="399.0" layoutY="462.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-
+        <Text fx:id="fnamev" fill="RED" layoutX="400.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="258.0" />
+        <Text fx:id="lnamev" fill="RED" layoutX="400.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="258.0" />
+        <Text fx:id="emailv" fill="RED" layoutX="400.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="258.0" />
+        <Text fx:id="phonev" fill="RED" layoutX="400.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="258.0" />
+        <Text fx:id="passwordv" fill="RED" layoutX="400.0" layoutY="515.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="258.0" />
+        <DatePicker fx:id="daten" layoutX="128.0" layoutY="384.0" prefHeight="35.0" prefWidth="258.0" promptText="Date de naissance" />
+        <ChoiceBox fx:id="genrel" accessibleHelp="Femme" accessibleText="Homme" layoutX="127.0" layoutY="438.0" prefHeight="38.0" prefWidth="258.0" />
+        <Text fx:id="datenv" fill="RED" layoutX="400.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="258.0" />
+        <Text fx:id="genrev" fill="RED" layoutX="400.0" layoutY="461.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="258.0" />
     </children>
-
 </AnchorPane>

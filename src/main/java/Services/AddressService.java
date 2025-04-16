@@ -1,77 +1,114 @@
-// AddressService.java
 package Services;
 
 import Models.Address;
+import Models.Utilisateur;
 import Utils.MyDb;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddressService implements IUser<Address> {
-    private Connection con;
+public class AddressService {
+    private Connection connection;
 
     public AddressService() {
-        this.con = MyDb.getInstance().getConnection();
+        this.connection = MyDb.getInstance().getConnection();
     }
 
-    @Override
-    public void insert(Address obj) throws SQLException {
-        String sql = "INSERT INTO address(user_id, address_line, city, state, postal_code, country, created_at) "
-                + "VALUES('" + obj.getUser_id() + "','"
-                + obj.getAddress_line() + "','"
-                + obj.getCity() + "','"
-                + obj.getState() + "','"
-                + obj.getPostal_code() + "','"
-                + obj.getCountry() + "','"
-                + LocalDate.now() + "')";
+    public void addaddres(Address adress) throws SQLException {
+        String sql = "INSERT INTO address (user_id, address_line, city, state, postal_code, country) VALUES (?, ?, ?, ?, ?, ?)";
 
-        Statement stmt = this.con.createStatement();
-        stmt.executeUpdate(sql);
-    }
+        try (PreparedStatement ste = connection.prepareStatement(sql)) {
+            ste.setInt(1, adress.getUser_id());
+            ste.setString(2, adress.getAddress_line());
+            ste.setString(3, adress.getCity());
+            ste.setString(4, adress.getState());
+            ste.setString(5, adress.getPostal_code()); // Correction ici
+            ste.setString(6, adress.getCountry());
 
-    @Override
-    public void update(Address obj) throws SQLException {
-        String sql = "UPDATE address SET "
-                + "user_id = '" + obj.getUser_id() + "', "
-                + "address_line = '" + obj.getAddress_line() + "', "
-                + "city = '" + obj.getCity() + "', "
-                + "state = '" + obj.getState() + "', "
-                + "postal_code = '" + obj.getPostal_code() + "', "
-                + "country = '" + obj.getCountry() + "' "
-                + "WHERE address_id = '" + obj.getAddress_id() + "'";
-
-        Statement stmt = this.con.createStatement();
-        stmt.executeUpdate(sql);
-    }
-
-    @Override
-    public void delete(Address obj) throws SQLException {
-        String sql = "DELETE FROM address WHERE address_id = '" + obj.getAddress_id() + "'";
-        Statement stmt = this.con.createStatement();
-        stmt.executeUpdate(sql);
-    }
-
-    @Override
-    public List<Address> findAll() throws SQLException {
-        String sql = "SELECT * FROM address";
-        Statement stmt = this.con.createStatement();
-        ResultSet rs = stmt.executeQuery(sql);
-        List<Address> list = new ArrayList<>();
-
-        while (rs.next()) {
-            Address address = new Address();
-            address.setAddress_id(rs.getInt("address_id"));
-            address.setUser_id(rs.getInt("user_id"));
-            address.setAddress_line(rs.getString("address_line"));
-            address.setCity(rs.getString("city"));
-            address.setState(rs.getString("state"));
-            address.setPostal_code(rs.getString("postal_code"));
-            address.setCountry(rs.getString("country"));
-            address.setCreated_at(rs.getDate("created_at").toLocalDate());
-
-            list.add(address);
+            ste.executeUpdate();
+            System.out.println("Adresse ajoutée");
         }
-        return list;
     }
+
+    public static Address getAddressByUserId(Utilisateur user) throws SQLException {
+        String sql = "SELECT * FROM address WHERE user_id = ?";
+        Connection cnx = MyDb.getInstance().getConnection();
+
+        try (PreparedStatement ste = cnx.prepareStatement(sql)) {
+            ste.setInt(1, user.getId());
+
+            try (ResultSet rs = ste.executeQuery()) {
+                if (rs.next()) {
+                    return new Address(
+                            rs.getInt("address_id"),
+                            rs.getInt("user_id"),
+                            rs.getString("address_line"),
+                            rs.getString("city"),
+                            rs.getString("state"),
+                            rs.getString("postal_code"),
+                            rs.getString("country"),
+                            rs.getDate("created_at").toLocalDate()
+                    );
+                }
+            }
+        }
+        return null;
+    }
+
+    public void deleteAddress(int addressId) throws SQLException { // Changé de Address à int
+        String sql = "DELETE FROM address WHERE address_id = ?";
+        try (PreparedStatement ste = connection.prepareStatement(sql)) {
+            ste.setInt(1, addressId); // Utilisation directe de l'ID
+            ste.executeUpdate();
+        }
+    }
+
+    public void updateAddress(Address address) throws SQLException {
+        String query = "UPDATE address SET " +
+                "address_line = ?, city = ?, state = ?, postal_code = ?, country = ? " +
+                "WHERE address_id = ?";
+
+        try (PreparedStatement pst = connection.prepareStatement(query)) {
+            pst.setString(1, address.getAddress_line());
+            pst.setString(2, address.getCity());
+            pst.setString(3, address.getState());
+            pst.setString(4, address.getPostal_code());
+            pst.setString(5, address.getCountry());
+            pst.setInt(6, address.getAddress_id());
+            pst.executeUpdate();
+        }
+    }
+
+    private boolean isValidAddress(Address address) {
+        if (address.getPostal_code() == null || !address.getPostal_code().matches("\\d{4,}")) {
+            System.out.println("Code postal invalide");
+            return false;
+        }
+        return true;
+    }
+
+    public List<Address> getAllAddresses() throws SQLException {
+        List<Address> addresses = new ArrayList<>();
+        String sql = "SELECT * FROM address";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Address address = new Address(
+                        rs.getInt("address_id"),
+                        rs.getInt("user_id"),
+                        rs.getString("address_line"),
+                        rs.getString("city"),
+                        rs.getString("state"),
+                        rs.getString("postal_code"),
+                        rs.getString("country"),
+                        rs.getDate("created_at") != null ? rs.getDate("created_at").toLocalDate() : null
+                );
+                addresses.add(address);
+            }
+        }
+        return addresses;
+    }
+
 }

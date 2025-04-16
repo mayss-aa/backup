@@ -29,7 +29,7 @@ public class RoleService implements IUser<Role> {
         String sql = "UPDATE role SET "
                 + "nom_role = '" + obj.getNomRole() + "', "
                 + "description = '" + obj.getDescription() + "' "
-                + "WHERE id = '" + obj.getId() + "'";
+                + "WHERE id = '" + obj.getrId() + "'";
 
         Statement stmt = this.con.createStatement();
         stmt.executeUpdate(sql);
@@ -37,7 +37,7 @@ public class RoleService implements IUser<Role> {
 
     @Override
     public void delete(Role obj) throws SQLException {
-        String sql = "DELETE FROM role WHERE id = '" + obj.getId() + "'";
+        String sql = "DELETE FROM role WHERE id = '" + obj.getrId() + "'";
         Statement stmt = this.con.createStatement();
         stmt.executeUpdate(sql);
     }
@@ -51,7 +51,7 @@ public class RoleService implements IUser<Role> {
 
         while (rs.next()) {
             Role role = new Role();
-            role.setId(rs.getInt("id"));
+            role.setrId(rs.getInt("id"));
             role.setNomRole(rs.getString("nom_role"));
             role.setDescription(rs.getString("description"));
 
@@ -75,4 +75,16 @@ public class RoleService implements IUser<Role> {
         }
         return null;
     }
+
+    public String getRoleNameById(int id) throws SQLException {
+        String sql = "SELECT nom_role FROM role WHERE id = ?";
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            return rs.next() ? rs.getString("nom_role") : null;
+        }
+    }
+
+
 }
