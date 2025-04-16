@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="731.0" prefWidth="1266.0" style="-fx-background-color: #FFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AdressController">
+    <children>
+        <ImageView fitHeight="444.0" fitWidth="472.0" layoutX="736.0" layoutY="59.0">
+            <image>
+                <Image url="@Images/Directions.gif" />
+            </image>
+        </ImageView>
+
+        <!-- Title -->
+        <Text fill="#0b4654" layoutX="183.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Bienvenue ! Installons-vous confortablement">
+            <font>
+                <Font name="FiraCode Nerd Font Bold" size="20.0" />
+            </font>
+        </Text>
+
+        <!-- Address Line -->
+        <TextField fx:id="adressline" alignment="CENTER" layoutX="129.0" layoutY="348.0" prefHeight="35.0" prefWidth="546.0" promptText="Ligne d'adresse">
+            <font>
+                <Font name="FiraCode Nerd Font Reg" size="14.0" />
+            </font>
+        </TextField>
+        <Text fx:id="addressError" fill="red" layoutX="129.0" layoutY="390.0" />
+
+        <!-- State -->
+        <TextField fx:id="state" alignment="CENTER" layoutX="129.0" layoutY="230.0" prefHeight="38.0" prefWidth="258.0" promptText="État/Région">
+            <font>
+                <Font name="FiraCode Nerd Font Reg" size="14.0" />
+            </font>
+        </TextField>
+
+        <!-- City -->
+        <TextField fx:id="city" alignment="CENTER" layoutX="415.0" layoutY="232.0" prefHeight="35.0" prefWidth="258.0" promptText="Ville">
+            <font>
+                <Font name="FiraCode Nerd Font Reg" size="14.0" />
+            </font>
+        </TextField>
+        <Text fx:id="cityError" fill="red" layoutX="415.0" layoutY="270.0" />
+
+        <!-- Postal Code -->
+        <TextField fx:id="postalcode" alignment="CENTER" layoutX="129.0" layoutY="281.0" prefHeight="38.0" prefWidth="258.0" promptText="Code Postal">
+            <font>
+                <Font name="FiraCode Nerd Font Reg" size="14.0" />
+            </font>
+        </TextField>
+        <Text fx:id="postalCodeError" fill="red" layoutX="129.0" layoutY="320.0" />
+
+        <!-- Country -->
+        <TextField fx:id="country" alignment="CENTER" layoutX="415.0" layoutY="281.0" prefHeight="38.0" prefWidth="258.0" promptText="Pays">
+            <font>
+                <Font name="FiraCode Nerd Font Reg" size="14.0" />
+            </font>
+        </TextField>
+        <Text fx:id="countryError" fill="red" layoutX="415.0" layoutY="320.0" />
+
+        <!-- Submit Button -->
+        <Button fx:id="singupbt" alignment="CENTER" layoutX="284.0" layoutY="441.0" mnemonicParsing="false" onAction="#addadressSingup" prefHeight="35.0" prefWidth="236.0" style="-fx-background-color: #07b263;" text="Soumettre l'adresse" textFill="#ffffffc9">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <font>
+                <Font name="FiraCode Nerd Font Bold" size="14.0" />
+            </font>
+        </Button>
+
+        <!-- Skip Button -->
+        <Button fx:id="skipsingup" layoutX="284.0" layoutY="512.0" mnemonicParsing="false" onAction="#skipsingup" prefHeight="38.0" prefWidth="236.0" style="-fx-background-color: #079af5;" text="Passer pour l'instant" textFill="#ffffffc2">
+            <font>
+                <Font name="FiraCode Nerd Font Bold" size="14.0" />
+            </font>
+        </Button>
+
+        <!-- Additional UI Elements -->
+        <Line endX="-9.0" layoutX="388.0" layoutY="494.0" startX="-100.0" stroke="#dadada" />
+        <Line endX="5.0" layoutX="510.0" layoutY="494.0" startX="-85.0" stroke="#dadada" />
+        <Text fill="#dadada" layoutX="393.0" layoutY="497.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ou">
+            <font>
+                <Font name="FiraCode Nerd Font Reg" size="14.0" />
+            </font>
+        </Text>
+        <Text fill="#0b4654" layoutX="81.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nous avons juste besoin de votre adresse pour simplifier les démarches.">
+            <font>
+                <Font name="FiraCode Nerd Font Reg" size="20.0" />
+            </font>
+        </Text>
+        <Line endX="324.0" layoutX="317.0" layoutY="151.0" startX="-147.0" stroke="#9e9e9e" />
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="972.0" layoutY="418.0">
+            <image>
+                <Image url="@Images/b65e179fdae0c2a30c61c8f9ff04cd95.gif" />
+            </image>
+        </ImageView>
+        <ImageView layoutX="158.0" layoutY="118.0">
+            <image>
+                <Image url="@Images/building.png" />
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>
