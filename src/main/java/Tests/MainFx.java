@@ -1,4 +1,4 @@
-package com.esprit.Tests;
+package Tests;
 
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -13,7 +13,7 @@ public class MainFx extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/back/categories_back.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/categories_back.fxml"));
         // hello
         Scene scene = new Scene(root);
         stage.setScene(scene);

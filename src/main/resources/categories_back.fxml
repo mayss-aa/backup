@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CategorieController">
+    <left>
+        <VBox prefHeight="731.0" prefWidth="240.0" styleClass="sidebar">
+            <children>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="240.0" styleClass="logo-container">
+                    <children>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                            </image>
+                        </ImageView>
+                        <Label prefHeight="32.0" prefWidth="236.0" styleClass="app-title" text="ArdhiSmart">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                </HBox>
+                <VBox alignment="CENTER" prefHeight="140.0" prefWidth="240.0" styleClass="user-profile-sidebar">
+                    <children>
+                        <StackPane>
+                            <children>
+                                <Circle radius="45.0" styleClass="profile-circle" />
+                                <ImageView fx:id="sidebarProfileImage" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                    </image>
+                                </ImageView>
+                                <Circle fx:id="statusIndicator" fill="#22c55e" radius="10.0" strokeType="INSIDE" strokeWidth="2.0" StackPane.alignment="BOTTOM_RIGHT">
+                                    <StackPane.margin>
+                                        <Insets bottom="5.0" right="5.0" />
+                                    </StackPane.margin>
+                                </Circle>
+                            </children>
+                        </StackPane>
+                        <Label fx:id="userStatusLabel" styleClass="user-status" text="En ligne" textAlignment="CENTER" />
+                    </children>
+                </VBox>
+                <Separator />
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="Profil">
+                    <padding>
+                        <Insets left="25.0" />
+                    </padding>
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="Utilisateurs">
+                    <padding>
+                        <Insets left="25.0" />
+                    </padding>
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="Adresses">
+                    <padding>
+                        <Insets left="25.0" />
+                    </padding>
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#goToProduit" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="Produit">
+                    <padding>
+                        <Insets left="25.0" />
+                    </padding>
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#goToFournisseur" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button-active" text="Fournisseur">
+                    <padding>
+                        <Insets left="25.0" />
+                    </padding>
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#goToCategorie" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button-active" text="Categorie">
+                    <padding>
+                        <Insets left="25.0" />
+                    </padding>
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="Communauté">
+                    <padding>
+                        <Insets left="25.0" />
+                    </padding>
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button-alt" text="Aide &amp; Support">
+                            <padding>
+                                <Insets left="25.0" />
+                            </padding>
+                            <graphic>
+                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button-alt" text="Déconnexion">
+                            <padding>
+                                <Insets left="25.0" />
+                            </padding>
+                            <graphic>
+                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <VBox.margin>
+                                <Insets bottom="15.0" />
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <!-- Main Content -->
+        <VBox spacing="20" style="-fx-background-color: #f5f6fa;">
+            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <Text fill="#2c3e50" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Gestion des Catégories" />
+            </HBox>
+
+            <!-- Search and Filter -->
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <TextField fx:id="searchField" prefWidth="300" promptText="Rechercher une catégorie..." style="-fx-background-radius: 5; -fx-border-radius: 5;">
+                    <padding><Insets left="10.0" /></padding>
+                </TextField>
+                <ComboBox fx:id="sortComboBox" promptText="Trier par" style="-fx-background-radius: 5;" />
+                <ComboBox fx:id="filterComboBox" promptText="Filtrer par catégorie" style="-fx-background-radius: 5;" />
+                <Button style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="Filtrer" />
+            </HBox>
+
+            <!-- Formulaire Catégorie -->
+            <GridPane hgap="15" vgap="15">
+                <padding><Insets top="10" bottom="10" left="10" right="10"/></padding>
+
+                <Label text="Nom:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                <TextField fx:id="tfNom" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+                <Label text="Description:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                <TextField fx:id="tfDescription" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+                <Label text="Saison de Récolte:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                <TextField fx:id="tfSaison" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+
+                <Label text="Température Idéale:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                <TextField fx:id="tfTemperature" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+            </GridPane>
+
+            <!-- ListView  -->
+            <ListView fx:id="categorieListView" prefHeight="235.0" prefWidth="845.0" styleClass="custom-list-view">
+                <VBox.margin>
+                    <Insets top="10" />
+                </VBox.margin>
+            </ListView>
+
+            <!-- Boutons CRUD -->
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button fx:id="btnAdd" text="Ajouter" onAction="#handleAdd" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" prefWidth="100"/>
+                <Button fx:id="btnUpdate" text="Modifier" onAction="#handleUpdate" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" prefWidth="100"/>
+                <Button fx:id="btnDelete" text="Supprimer" onAction="#handleDelete" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" prefWidth="100"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
+

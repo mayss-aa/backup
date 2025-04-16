@@ -1,16 +1,17 @@
 module ahlem_C {
     requires javafx.controls;
     requires javafx.fxml;
-requires java.sql;
-    opens com.esprit.Controllers.back to javafx.fxml;
-    exports com.esprit.Controllers.back;
+    requires java.sql;
 
-    // si tu as d'autres packages :
-    opens com.esprit.Models to javafx.base;
-    exports com.esprit.Models;
+    opens Controllers to javafx.fxml;
+    exports Controllers;
 
-    opens com.esprit.Services to javafx.base;
-    exports com.esprit.Services;
-    opens com.esprit.Tests to javafx.base;
-    exports com.esprit.Tests;
+    opens Models to javafx.base;
+    exports Models;
+
+    opens Services to javafx.base;
+    exports Services;
+
+    opens Tests to javafx.base, javafx.fxml; // <-- Combined here!
+    exports Tests;
 }

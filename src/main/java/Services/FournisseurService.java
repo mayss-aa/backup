@@ -1,7 +1,7 @@
-package com.esprit.Services;
+package Services;
 
-import com.esprit.Models.Fournisseur;
-import com.esprit.Utils.MyDb;
+import Models.Fournisseur;
+import Utils.MyDb;
 
 import java.sql.*;
 import java.util.ArrayList;

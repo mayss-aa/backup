@@ -1,4 +1,4 @@
-package com.esprit.Models;
+package Models;
 import java.time.LocalDate;
 
 public class Produit {

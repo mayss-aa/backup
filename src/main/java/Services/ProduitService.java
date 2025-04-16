@@ -1,7 +1,7 @@
-package com.esprit.Services;
+package Services;
 
-import com.esprit.Models.Produit;
-import com.esprit.Utils.MyDb;
+import Models.Produit;
+import Utils.MyDb;
 
 import java.sql.*;
 import java.time.LocalDate;

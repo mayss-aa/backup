@@ -1,4 +1,4 @@
-package com.esprit.Models;
+package Models;
 
 public class Categorie {
     private String nomCategorie;

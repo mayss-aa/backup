@@ -1,4 +1,4 @@
-package com.esprit.Models;
+package Models;
 
 public class Fournisseur {
     private int id;

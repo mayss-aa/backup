@@ -1,11 +1,11 @@
-package com.esprit.Controllers.back;
+package Controllers;
 
-import com.esprit.Models.Categorie;
-import com.esprit.Models.Fournisseur;
-import com.esprit.Models.Produit;
-import com.esprit.Services.CategorieService;
-import com.esprit.Services.FournisseurService;
-import com.esprit.Services.ProduitService;
+import Models.Categorie;
+import Models.Fournisseur;
+import Models.Produit;
+import Services.CategorieService;
+import Services.FournisseurService;
+import Services.ProduitService;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -18,7 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
+import javafx.scene.layout.VBox;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
@@ -28,7 +28,7 @@ public class ProduitController {
     @FXML private DatePicker dpDateSemis, dpDateRecolte;
     @FXML private ComboBox<Categorie> cbCategorie;
     @FXML private ComboBox<Fournisseur> cbFournisseur;
-    @FXML private TableView<Produit> tableProduit;
+    @FXML private ListView<Produit> produitListView;
     @FXML private TableColumn<Produit, String> colNom, colCycle, colCategorie, colFournisseur;
 
     private final ObservableList<Produit> produits = FXCollections.observableArrayList();
@@ -40,17 +40,49 @@ public class ProduitController {
 
     @FXML
     public void initialize() {
+        assert tfNomProduit != null : "fx:id=\"tfNomProduit\" not injected: check your FXML file.";
+        assert tfCycleCulture != null : "fx:id=\"tfCycleCulture\" not injected: check your FXML file.";
+        assert tfQuantiteProd != null : "fx:id=\"tfQuantiteProd\" not injected: check your FXML file.";
+        assert tfQuantiteVendue != null : "fx:id=\"tfQuantiteVendue\" not injected: check your FXML file.";
+        assert tfUnite != null : "fx:id=\"tfUnite\" not injected: check your FXML file.";
+        assert cbCategorie != null : "fx:id=\"cbCategorie\" not injected: check your FXML file.";
+        assert cbFournisseur != null : "fx:id=\"cbFournisseur\" not injected: check your FXML file.";
+        assert dpDateSemis != null : "fx:id=\"dpDateSemis\" not injected: check your FXML file.";
+        assert dpDateRecolte != null : "fx:id=\"dpDateRecolte\" not injected: check your FXML file.";
+        assert produitListView != null : "fx:id=\"produitListView\" not injected: check your FXML file.";
+
         try {
             cbCategorie.setItems(FXCollections.observableArrayList(categorieService.findAll()));
             cbFournisseur.setItems(FXCollections.observableArrayList(fournisseurService.findAll()));
             loadProduits();
 
-            colNom.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getNomProduit()));
-            colCycle.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCycleCulture()));
-            colCategorie.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCategorie()));
-            colFournisseur.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getFournisseur()).asObject().asString());
+            produitListView.setItems(produits);
+            produitListView.setCellFactory(list -> new ListCell<>() {
+                @Override
+                protected void updateItem(Produit produit, boolean empty) {
+                    super.updateItem(produit, empty);
+                    if (empty || produit == null) {
+                        setGraphic(null);
+                    } else {
+                        VBox container = new VBox(4);
+                        container.setStyle("-fx-padding: 10; -fx-background-color: #e8f5e9; -fx-background-radius: 8;");
 
-            tableProduit.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+                        Label nom = new Label("Nom : " + produit.getNomProduit());
+                        nom.setStyle("-fx-font-weight: bold; -fx-font-size: 14;");
+
+                        Label cycle = new Label("Cycle : " + produit.getCycleCulture());
+                        Label quantite = new Label("Quantité Produite : " + produit.getQuantiteProduit());
+                        Label unite = new Label("Unité : " + produit.getUniteQuantProd());
+                        Label dateSemis = new Label("Semis : " + produit.getDateSemisProd());
+                        Label dateRecolte = new Label("Récolte : " + produit.getDateRecolteProd());
+
+                        container.getChildren().addAll(nom, cycle, quantite, unite, dateSemis, dateRecolte);
+                        setGraphic(container);
+                    }
+                }
+            });
+
+            produitListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
                 if (newVal != null) {
                     selectedProduit = newVal;
                     tfNomProduit.setText(newVal.getNomProduit());
@@ -65,14 +97,14 @@ public class ProduitController {
                 }
             });
         } catch (SQLException e) {
-            showError("Erreur d'initialisation: " + e.getMessage());
+            showError("Erreur d'initialisation : " + e.getMessage());
         }
     }
 
     private void loadProduits() throws SQLException {
         produits.clear();
         produits.addAll(produitService.findAll());
-        tableProduit.setItems(produits);
+        produitListView.setItems(produits);
     }
 
     @FXML
@@ -158,7 +190,7 @@ public class ProduitController {
         dpDateRecolte.setValue(null);
         cbCategorie.getSelectionModel().clearSelection();
         cbFournisseur.getSelectionModel().clearSelection();
-        tableProduit.getSelectionModel().clearSelection();
+        produitListView.getSelectionModel().clearSelection();
         selectedProduit = null;
     }
 
@@ -172,7 +204,7 @@ public class ProduitController {
 
     public void fournisseur(ActionEvent actionEvent) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/back/fournisseur_back.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fournisseur_back.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -183,7 +215,7 @@ public class ProduitController {
 
     public void categorie(ActionEvent actionEvent) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/back/categories_back.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/categories_back.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -270,5 +302,33 @@ public class ProduitController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-}
+    @FXML
+    private void goToProduit(ActionEvent event) {
+        try {
+            Parent produitView = FXMLLoader.load(getClass().getResource("/produit_back.fxml"));
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(produitView));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void goToFournisseur(ActionEvent event) {
+        try {
+            Parent fournisseurView = FXMLLoader.load(getClass().getResource("/fournisseur_back.fxml"));
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(fournisseurView));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void goToCategorie(ActionEvent event) {
+        try {
+            Parent categorieView = FXMLLoader.load(getClass().getResource("/categories_back.fxml"));
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(categorieView));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+}}

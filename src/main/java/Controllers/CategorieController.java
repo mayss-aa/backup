@@ -1,7 +1,7 @@
-package com.esprit.Controllers.back;
+package Controllers;
 
-import com.esprit.Models.Categorie;
-import com.esprit.Services.CategorieService;
+import Models.Categorie;
+import Services.CategorieService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,15 +14,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
+import javafx.scene.layout.VBox;
 import java.sql.SQLException;
 
 public class CategorieController {
 
     @FXML private StackPane formPane;
+    @FXML private ListView<Categorie> categorieListView;
 
     @FXML private TextField tfNom, tfDescription, tfSaison, tfTemperature;
-    @FXML private TableView<Categorie> categorieTable;
+
     @FXML private TableColumn<Categorie, String> colNom, colDescription, colSaison, colTemperature;
 
     @FXML private Button btnAdd, btnUpdate, btnDelete;
@@ -32,22 +33,42 @@ public class CategorieController {
 
     private Categorie selectedCategorie = null;
 
+
     @FXML
     public void initialize() {
         assert tfNom != null : "fx:id=\"tfNom\" not injected: check your FXML file.";
         assert tfDescription != null : "fx:id=\"tfDescription\" not injected: check your FXML file.";
         assert tfSaison != null : "fx:id=\"tfSaison\" not injected: check your FXML file.";
         assert tfTemperature != null : "fx:id=\"tfTemperature\" not injected: check your FXML file.";
-        assert categorieTable != null : "fx:id=\"categorieTable\" not injected: check your FXML file.";
-
-        colNom.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNomCategorie()));
-        colDescription.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescriptionCategorie()));
-        colSaison.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSaisonDeRecolte()));
-        colTemperature.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTemperatureIdeale()));
+        assert categorieListView != null : "fx:id=\"categorieListView\" not injected: check your FXML file.";
 
         loadCategories();
 
-        categorieTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        categorieListView.setItems(categoriesList);
+        categorieListView.setCellFactory(list -> new ListCell<>() {
+            @Override
+            protected void updateItem(Categorie categorie, boolean empty) {
+                super.updateItem(categorie, empty);
+                if (empty || categorie == null) {
+                    setGraphic(null);
+                } else {
+                    VBox container = new VBox(4);
+                    container.setStyle("-fx-padding: 10; -fx-background-color: #f5f5f5; -fx-background-radius: 10;");
+
+                    Label nom = new Label("Nom : " + categorie.getNomCategorie());
+                    nom.setStyle("-fx-font-weight: bold; -fx-font-size: 14;");
+
+                    Label description = new Label("Description : " + categorie.getDescriptionCategorie());
+                    Label saison = new Label("Saison : " + categorie.getSaisonDeRecolte());
+                    Label temperature = new Label("Température Idéale : " + categorie.getTemperatureIdeale());
+
+                    container.getChildren().addAll(nom, description, saison, temperature);
+                    setGraphic(container);
+                }
+            }
+        });
+
+        categorieListView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 selectedCategorie = newSelection;
                 tfNom.setText(newSelection.getNomCategorie());
@@ -58,15 +79,20 @@ public class CategorieController {
         });
     }
 
+
     private void loadCategories() {
         categoriesList.clear();
         try {
             categoriesList.addAll(categorieService.findAll());
         } catch (SQLException e) {
+            e.printStackTrace();
             showError("Erreur lors du chargement des catégories: " + e.getMessage());
         }
-        categorieTable.setItems(categoriesList);
+
+        // Lié à la ListView maintenant :
+        categorieListView.setItems(categoriesList);
     }
+
 
     @FXML
     public void handleAdd() {
@@ -138,7 +164,7 @@ public class CategorieController {
         tfSaison.clear();
         tfTemperature.clear();
         selectedCategorie = null;
-        categorieTable.getSelectionModel().clearSelection();
+        categorieListView.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -156,7 +182,7 @@ public class CategorieController {
 
     public void Produits(ActionEvent actionEvent) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/back/produit_back.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/produit_back.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -167,7 +193,7 @@ public class CategorieController {
 
     public void fournisseur(ActionEvent actionEvent) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/back/fournisseur_back.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fournisseur_back.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -217,6 +243,37 @@ public class CategorieController {
 
         return true;
     }
+    @FXML
+    private void goToProduit(ActionEvent event) {
+        try {
+            Parent produitView = FXMLLoader.load(getClass().getResource("/produit_back.fxml"));
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(produitView));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void goToFournisseur(ActionEvent event) {
+        try {
+            Parent fournisseurView = FXMLLoader.load(getClass().getResource("/fournisseur_back.fxml"));
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(fournisseurView));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void goToCategorie(ActionEvent event) {
+        try {
+            Parent categorieView = FXMLLoader.load(getClass().getResource("/categories_back.fxml"));
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(categorieView));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }

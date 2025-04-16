@@ -1,12 +1,19 @@
-package com.esprit.Services;
+package Services;
 
-import com.esprit.Models.Categorie;
-import com.esprit.Utils.MyDb;
-
+import Models.Categorie;
+import Utils.MyDb;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+import Utils.MyDb;
+
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 public class CategorieService {
     private Connection con;
 

@@ -1,7 +1,7 @@
-package com.esprit.Controllers.back;
+package Controllers;
 
-import com.esprit.Models.Fournisseur;
-import com.esprit.Services.FournisseurService;
+import Models.Fournisseur;
+import Services.FournisseurService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,15 +12,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
+import javafx.scene.layout.VBox;
 import java.sql.SQLException;
 
 public class FournisseurController {
 
     @FXML private TextField tfNom, tfEmail, tfTelephone, tfAdresse;
-    @FXML private TableView<Fournisseur> fournisseurTable;
+    @FXML private ListView<Fournisseur> fournisseurListView;
     @FXML private TableColumn<Fournisseur, String> colNom, colEmail, colTelephone, colAdresse;
     @FXML private Button btnAdd, btnUpdate, btnDelete;
 
@@ -30,14 +29,41 @@ public class FournisseurController {
 
     @FXML
     public void initialize() {
-        colNom.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNomFournisseur()));
-        colEmail.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
-        colTelephone.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelephone()));
-        colAdresse.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAdresseFournisseur()));
+        assert tfNom != null : "fx:id=\"tfNom\" not injected: check your FXML file.";
+        assert tfEmail != null : "fx:id=\"tfEmail\" not injected: check your FXML file.";
+        assert tfTelephone != null : "fx:id=\"tfTelephone\" not injected: check your FXML file.";
+        assert tfAdresse != null : "fx:id=\"tfAdresse\" not injected: check your FXML file.";
+        assert fournisseurListView != null : "fx:id=\"fournisseurListView\" not injected: check your FXML file.";
 
+        // Chargement des fournisseurs depuis le service
         loadFournisseurs();
 
-        fournisseurTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+        // Configuration de l'affichage de la ListView
+        fournisseurListView.setCellFactory(list -> new ListCell<>() {
+            @Override
+            protected void updateItem(Fournisseur fournisseur, boolean empty) {
+                super.updateItem(fournisseur, empty);
+                if (empty || fournisseur == null) {
+                    setGraphic(null);
+                } else {
+                    VBox container = new VBox(4);
+                    container.setStyle("-fx-padding: 10; -fx-background-color: #f9f9f9; -fx-background-radius: 8;");
+
+                    Label nom = new Label("Nom : " + fournisseur.getNomFournisseur());
+                    nom.setStyle("-fx-font-weight: bold; -fx-font-size: 14;");
+
+                    Label email = new Label("Email : " + fournisseur.getEmail());
+                    Label telephone = new Label("Téléphone : " + fournisseur.getTelephone());
+                    Label adresse = new Label("Adresse : " + fournisseur.getAdresseFournisseur());
+
+                    container.getChildren().addAll(nom, email, telephone, adresse);
+                    setGraphic(container);
+                }
+            }
+        });
+
+        // Mise à jour des champs texte à la sélection d’un fournisseur
+        fournisseurListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 selectedFournisseur = newVal;
                 tfNom.setText(newVal.getNomFournisseur());
@@ -48,16 +74,17 @@ public class FournisseurController {
         });
     }
 
+
     private void loadFournisseurs() {
         fournisseurList.clear();
         try {
             fournisseurList.addAll(fournisseurService.findAll());
         } catch (SQLException e) {
+            e.printStackTrace();
             showError("Erreur lors du chargement des fournisseurs: " + e.getMessage());
         }
-        fournisseurTable.setItems(fournisseurList);
+        fournisseurListView.setItems(fournisseurList);
     }
-
     @FXML
     public void handleAdd() {
         if (!validateFields()) return;
@@ -123,7 +150,7 @@ public class FournisseurController {
         tfTelephone.clear();
         tfAdresse.clear();
         selectedFournisseur = null;
-        fournisseurTable.getSelectionModel().clearSelection();
+        fournisseurListView.getSelectionModel().clearSelection();
     }
 
     private void showError(String message) {
@@ -136,7 +163,7 @@ public class FournisseurController {
 
     public void produit(ActionEvent actionEvent) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/back/produit_back.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/produit_back.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -146,7 +173,7 @@ public class FournisseurController {
     }
     public void categorie (ActionEvent actionEvent) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/back/categories_back.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/categories_back.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -156,7 +183,7 @@ public class FournisseurController {
 
     public void fournisseur(ActionEvent actionEvent) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/back/fournisseur_back.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fournisseur_back.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -204,5 +231,29 @@ public class FournisseurController {
         return true;
     }
 
+    private void navigateToView(String fxmlPath, ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    @FXML
+    public void goToProduit(ActionEvent event) {
+        navigateToView("/produit_back.fxml", event);
+    }
+
+    @FXML
+    public void goToFournisseur(ActionEvent event) {
+        navigateToView("/fournisseur_back.fxml", event);
+    }
+
+    @FXML
+    public void goToCategorie(ActionEvent event) {
+        navigateToView("/categories_back.fxml", event);
+    }
 }
