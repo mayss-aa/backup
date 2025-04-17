@@ -49,6 +49,7 @@ public class AjouterZone implements Initializable {
             e.printStackTrace();
         }
     }
+
     public void goToZone(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/AjouterZone.fxml"));
@@ -60,6 +61,7 @@ public class AjouterZone implements Initializable {
             e.printStackTrace();
         }
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -101,6 +103,7 @@ public class AjouterZone implements Initializable {
             }
         }
     }
+
     @FXML
     void AfficherListe(ActionEvent event) {
         try {
@@ -182,5 +185,19 @@ public class AjouterZone implements Initializable {
         alert.setTitle(titre);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+
+    @FXML
+    private void onprofilchaima(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/admininformation.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

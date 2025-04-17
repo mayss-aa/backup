@@ -239,8 +239,8 @@ public class AdminAddressController {
     }
 
     @FXML
-    private void goprofile(ActionEvent event) throws IOException {
-        // Logique pour le profil
+    void goprofile(ActionEvent event) throws IOException {
+        SceneController.loadPage("/admininformation.fxml");
     }
 
     @FXML

@@ -76,13 +76,13 @@ public class LoginController {
             String fxmlPath;
             switch (role_id) {
                 case 1:
-                    fxmlPath = "/admin.fxml";
+                    fxmlPath = "/admininformation.fxml";
                     break;
                 case 2:
                     fxmlPath = "/adduser.fxml";
                     break;
                 default:
-                    fxmlPath = "/admin.fxml";
+                    fxmlPath = "/admininformation.fxml";
                     break;
             }
 

@@ -4,7 +4,9 @@ import Models.Maintenance;
 import Models.Machine;
 import Services.MachineService;
 import Services.MaintenanceService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
@@ -246,5 +248,16 @@ public class MaintenanceFormController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void omprofilamen (ActionEvent event){
+        try {
+            Parent categorieView = FXMLLoader.load(getClass().getResource("/admininformation.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(categorieView));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

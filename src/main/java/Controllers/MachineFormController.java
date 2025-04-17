@@ -1,8 +1,10 @@
 package Controllers;
 
 import Models.Machine;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -112,5 +114,21 @@ public class MachineFormController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void onprofilamen(ActionEvent event) {
+       // loadFXML("/admininformation.fxml", event);
+
+    }
+    @FXML
+    private void ommaint(ActionEvent event) {
+        try {
+            Parent categorieView = FXMLLoader.load(getClass().getResource("/maintenance_form.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(categorieView));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

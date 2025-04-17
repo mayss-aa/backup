@@ -326,9 +326,22 @@ public class ProduitController {
     private void goToCategorie(ActionEvent event) {
         try {
             Parent categorieView = FXMLLoader.load(getClass().getResource("/categories_back.fxml"));
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(categorieView));
         } catch (Exception e) {
             e.printStackTrace();
         }
-}}
+    }
+
+
+        @FXML
+        private void onprofilahlem (ActionEvent event){
+            try {
+                Parent categorieView = FXMLLoader.load(getClass().getResource("/admininformation.fxml"));
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(categorieView));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }

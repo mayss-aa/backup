@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import java.net.URL?>
 
-<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Controllers.AjouterZone"
-            stylesheets="@StyleZonePlante/style.css">
+<BorderPane stylesheets="@StyleZonePlante/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AjouterZone">
 
    <left>
       <VBox prefHeight="731.0" prefWidth="240.0" styleClass="sidebar">
@@ -54,7 +56,7 @@
                </children>
             </VBox>
             <Separator />
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="Profil">
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#onprofilchaima" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="Profil">
                <padding>
                   <Insets left="25.0" />
                </padding>
@@ -160,28 +162,28 @@
          </StackPane>
 
          <VBox spacing="15" styleClass="form-content">
-            <padding><Insets top="20" right="30" bottom="20" left="30"/></padding>
+            <padding><Insets bottom="20" left="30" right="30" top="20" /></padding>
 
             <VBox spacing="5">
-               <Label text="Nom de la zone:"/>
-               <TextField fx:id="nom_zone" promptText="Nom de la zone"/>
+               <Label text="Nom de la zone:" />
+               <TextField fx:id="nom_zone" promptText="Nom de la zone" />
             </VBox>
 
             <VBox spacing="5">
-               <Label text="Superficie:"/>
-               <TextField fx:id="superficie" promptText="Superficie"/>
+               <Label text="Superficie:" />
+               <TextField fx:id="superficie" promptText="Superficie" />
             </VBox>
 
             <VBox spacing="5">
-               <Label text="Plante associée:"/>
-               <ComboBox fx:id="planteComboBox" promptText="Choisir une plante"/>
+               <Label text="Plante associée:" />
+               <ComboBox fx:id="planteComboBox" promptText="Choisir une plante" />
             </VBox>
          </VBox>
 
-         <HBox spacing="15" alignment="CENTER_RIGHT">
-            <padding><Insets top="10" right="30" bottom="20" left="30"/></padding>
-            <Button text="Valider" onAction="#Valider" styleClass="save-button"/>
-            <Button text="Afficher liste" onAction="#AfficherListe" styleClass="edit-button"/>
+         <HBox alignment="CENTER_RIGHT" spacing="15">
+            <padding><Insets bottom="20" left="30" right="30" top="10" /></padding>
+            <Button onAction="#Valider" styleClass="save-button" text="Valider" />
+            <Button onAction="#AfficherListe" styleClass="edit-button" text="Afficher liste" />
          </HBox>
       </VBox>
    </center>
