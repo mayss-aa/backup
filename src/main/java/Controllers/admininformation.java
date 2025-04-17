@@ -24,15 +24,7 @@ public class admininformation {
         loadFXML("/adminadress.fxml", event);
     }
 
-    @FXML
-    private void gozones(ActionEvent event) {
-      //  loadFXML("/zones.fxml", event);
-    }
 
-    @FXML
-    private void goplantes(ActionEvent event) {
-      //  loadFXML("/plantes.fxml", event);
-    }
 
     private void loadFXML(String fxmlPath, ActionEvent event) {
         try {
@@ -99,17 +91,28 @@ public class admininformation {
 
     @FXML
     private void gomachine(ActionEvent event) {
+        loadFXML("/machine_form.fxml", event);
 
     }
 
     @FXML
     private void goproduit(ActionEvent event) {
+        loadFXML("/produit_back.fxml", event);
     }
 
     @FXML
     private void gostock(ActionEvent event) {
+        loadFXML("/AddDepot.fxml", event);
 
     }
+    @FXML
+    private void gozones(ActionEvent event) {
+        loadFXML("/AjouterZone.fxml", event);
+    }
 
+    @FXML
+    private void goplantes(ActionEvent event) {
+          loadFXML("/AjouterPlante.fxml", event);
+    }
 
 }

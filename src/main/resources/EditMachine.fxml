@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<?import java.net.URL?>
+<AnchorPane prefWidth="400.0" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Controllers.EditMachineController">
+    <stylesheets>
+        <URL value="@styledepot/gestion.css"/>
+    </stylesheets>
+
+    <GridPane AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10" hgap="10" vgap="10">
+        <padding>
+            <Insets bottom="10" left="10" right="10" top="10"/>
+        </padding>
+
+        <Label text="Nom de la machine:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="nomMachineField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="État de la machine:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="etatMachineField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Marque de la machine:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField fx:id="marqueMachineField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Date d'achat:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="dateAchatField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+        <HBox spacing="5" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Button text="OK" onAction="#handleOk"/>
+            <Button text="Annuler" onAction="#handleCancel"/>
+        </HBox>
+    </GridPane>
+</AnchorPane>

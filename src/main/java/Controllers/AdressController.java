@@ -139,7 +139,7 @@ public class AdressController {
 
             // Redirection conditionnelle
 
-                SceneController.loadPage("/admin.fxml"); // Redirection directe
+                SceneController.loadPage("/admininformation.fxml"); // Redirection directe
 
         } catch (IOException e) {
             showAlert("Erreur", "Échec de redirection: " + e.getMessage(), Alert.AlertType.ERROR);
