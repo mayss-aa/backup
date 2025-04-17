@@ -63,7 +63,7 @@ public class AdressController {
                 currentStage.close();
 
                 // Charger admin.fxml
-                Parent root = FXMLLoader.load(getClass().getResource("/admin.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/admininformation.fxml"));
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
