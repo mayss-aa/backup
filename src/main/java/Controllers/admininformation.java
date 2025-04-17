@@ -58,13 +58,7 @@ public class admininformation {
     private void goprofile(ActionEvent event) {
     }
 
-    @FXML
-    private void gocommunity(ActionEvent event) {
-    }
 
-    @FXML
-    private void promo(ActionEvent event) {
-    }
 
     @FXML
     private void logout(ActionEvent event) {
@@ -96,6 +90,25 @@ public class admininformation {
     private void changephoto(ActionEvent event) {
         // Logique pour changer la photo
         System.out.println("Changement de photo...");
+    }
+
+
+
+
+
+
+    @FXML
+    private void gomachine(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void goproduit(ActionEvent event) {
+    }
+
+    @FXML
+    private void gostock(ActionEvent event) {
+
     }
 
 
