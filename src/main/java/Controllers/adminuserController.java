@@ -86,8 +86,8 @@ public class adminuserController {
 
     private String getNomRole(int roleId) {
         switch(roleId) {
-            case 1: return "Admin";
-            case 2: return "Agri";
+            case 1: return "ROLE_ADMIN";
+            case 2: return "ROLE_AGRI";
             case 3: return "Autre";
             default: return "Inconnu";
         }
@@ -244,9 +244,9 @@ public class adminuserController {
         TextField nomField = new TextField(user.getNom());
         TextField phoneField = new TextField(user.getNum_tel());
         TextField emailField = new TextField(user.getEmail());
-        ComboBox<String> genreCombo = new ComboBox<>(FXCollections.observableArrayList("Masculin", "Féminin"));
+        ComboBox<String> genreCombo = new ComboBox<>(FXCollections.observableArrayList("Homme", "Femme"));
         genreCombo.setValue(user.getGenre());
-        ComboBox<String> roleCombo = new ComboBox<>(FXCollections.observableArrayList("Admin", "Agri", "Autre"));
+        ComboBox<String> roleCombo = new ComboBox<>(FXCollections.observableArrayList("ROLE_ADMIN", "ROLE_AGRI", "Autre"));
         roleCombo.setValue(getNomRole(user.getRole_id()));
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Laisser vide pour ne pas changer");
@@ -278,8 +278,8 @@ public class adminuserController {
                 }
 
                 int selectedRoleId = switch(roleCombo.getValue()) {
-                    case "Admin" -> 1;
-                    case "Agri" -> 2;
+                    case "ROLE_ADMIN" -> 1;
+                    case "ROLE_AGRI" -> 2;
                     case "Autre" -> 3;
                     default -> 0;
                 };
@@ -336,7 +336,7 @@ public class adminuserController {
     private void handleDeleteUser(Utilisateur user) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Supprimer utilisateur");
-        alert.setHeaderText("Are you sure you want to delete this user?");
+        alert.setHeaderText("Êtes-vous sûr de vouloir supprimer cet utilisateur ?");
         alert.setContentText("User: " + user.getPrenom() + " " + user.getNom());
 
         Optional<ButtonType> result = alert.showAndWait();
@@ -417,5 +417,150 @@ public class adminuserController {
     @FXML
     void gojob(ActionEvent event) throws IOException {
         SceneController.loadPage("/adminjob.fxml");
+    }
+    @FXML
+    private void ajoutuser(ActionEvent event) {
+        Dialog<Utilisateur> dialog = new Dialog<>();
+        dialog.setTitle("Nouvel Utilisateur");
+        dialog.setHeaderText("Création d'un nouvel utilisateur");
+
+        ButtonType saveButtonType = new ButtonType("Créer", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        DatePicker datePicker = new DatePicker();
+        datePicker.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(date.isAfter(LocalDate.now()));
+            }
+        });
+
+        TextField prenomField = new TextField();
+        TextField nomField = new TextField();
+        TextField phoneField = new TextField();
+        TextField emailField = new TextField();
+        ComboBox<String> genreCombo = new ComboBox<>(FXCollections.observableArrayList("Homme", "Femme"));
+        ComboBox<String> roleCombo = new ComboBox<>(FXCollections.observableArrayList("ROLE_ADMIN", "ROLE_AGRI", "Autre"));
+        PasswordField passwordField = new PasswordField();
+
+        // Set default values
+        genreCombo.getSelectionModel().selectFirst();
+        roleCombo.getSelectionModel().selectLast(); // Default to "Autre"
+
+        grid.add(new Label("Prénom* :"), 0, 0);
+        grid.add(prenomField, 1, 0);
+        grid.add(new Label("Nom* :"), 0, 1);
+        grid.add(nomField, 1, 1);
+        grid.add(new Label("Téléphone* :"), 0, 2);
+        grid.add(phoneField, 1, 2);
+        grid.add(new Label("Email* :"), 0, 3);
+        grid.add(emailField, 1, 3);
+        grid.add(new Label("Genre* :"), 0, 4);
+        grid.add(genreCombo, 1, 4);
+        grid.add(new Label("Rôle* :"), 0, 5);
+        grid.add(roleCombo, 1, 5);
+        grid.add(new Label("Naissance* :"), 0, 6);
+        grid.add(datePicker, 1, 6);
+        grid.add(new Label("Mot de passe* :"), 0, 7);
+        grid.add(passwordField, 1, 7);
+
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == saveButtonType) {
+                // Validate all required fields
+                if (prenomField.getText().isEmpty() || nomField.getText().isEmpty() ||
+                        phoneField.getText().isEmpty() || emailField.getText().isEmpty() ||
+                        passwordField.getText().isEmpty() || datePicker.getValue() == null) {
+                    showAlert("Champs manquants", "Tous les champs obligatoires (*) doivent être remplis");
+                    return null;
+                }
+
+                if (!emailField.getText().contains("@")) {
+                    showAlert("Email invalide", "Format email incorrect");
+                    return null;
+                }
+
+                int selectedRoleId = switch(roleCombo.getValue()) {
+                    case "ROLE_ADMIN" -> 1;
+                    case "ROLE_AGRI" -> 2;
+                    case "Autre" -> 3;
+                    default -> 0;
+                };
+
+                return new Utilisateur(
+                        0, // ID will be generated by database
+                        selectedRoleId,
+                        prenomField.getText(),
+                        nomField.getText(),
+                        emailField.getText(),
+                        genreCombo.getValue(),
+                        datePicker.getValue(),
+                        phoneField.getText(),
+                        passwordField.getText(), // Password is mandatory for new users
+                        LocalDateTime.now(), // Creation date
+                        LocalDateTime.now(), //  update date initially
+                        null, // token
+                        null, // photo
+                        null, // reset_code
+                        null  // reset_code_expires_at
+                );
+            }
+            return null;
+        });
+
+        Optional<Utilisateur> result = dialog.showAndWait();
+        result.ifPresent(newUser -> {
+            try {
+                // Check if email already exists
+                if (service.emailExists(newUser.getEmail())) {
+                    showAlert("Email existant", "Cet email est déjà utilisé par un autre utilisateur");
+                    return;
+                }
+
+                service.addu(newUser);
+                loadUsersFromDatabase();
+                showAlert("Succès", "Utilisateur créé avec succès", Alert.AlertType.INFORMATION);
+            } catch (SQLException e) {
+                showAlert("Erreur BDD", "Échec de la création : " + e.getMessage());
+            }
+        });
+    }
+
+    // Add this overloaded showAlert method for success messages
+    private void showAlert(String titre, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(titre);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+
+
+
+
+
+
+
+
+    @FXML
+    private void gomachine(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void goproduit(ActionEvent event) {
+    }
+
+    @FXML
+    private void gostock(ActionEvent event) {
+
     }
 }

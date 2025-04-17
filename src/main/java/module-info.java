@@ -2,6 +2,8 @@ module ahlem_C {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires jdk.httpserver;
+    requires java.datatransfer;
 
     opens Controllers to javafx.fxml;
     exports Controllers;

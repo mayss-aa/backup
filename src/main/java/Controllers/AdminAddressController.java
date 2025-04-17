@@ -28,7 +28,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-import java.awt.*;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -384,6 +384,24 @@ public class AdminAddressController {
             alert.setContentText(message);
             alert.showAndWait();
         }
+
+
+
+
+
+    @FXML
+    private void gomachine(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void goproduit(ActionEvent event) {
+    }
+
+    @FXML
+    private void gostock(ActionEvent event) {
+
+    }
     }
 
 

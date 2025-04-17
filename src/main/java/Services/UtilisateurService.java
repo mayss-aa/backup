@@ -216,4 +216,34 @@ public class UtilisateurService implements IUser<Utilisateur> {
             ) : null;
         }
     }
+
+
+    public boolean emailExists(String email) throws SQLException {
+        String query = "SELECT COUNT(*) FROM utilisateur WHERE email = ?";
+        try (PreparedStatement pst = connection.prepareStatement(query)) {
+            pst.setString(1, email);
+            ResultSet rs = pst.executeQuery();
+            return rs.next() && rs.getInt(1) > 0;
+        }
+    }
+
+    public void addu(Utilisateur user) throws SQLException {
+        String query = "INSERT INTO utilisateur (role_id, prenom, nom, email, genre, date_naissance, num_tel, password, cree_le ,mis_ajour_le) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
+
+        try (PreparedStatement pst = connection.prepareStatement(query)) {
+            pst.setInt(1, user.getRole_id());
+            pst.setString(2, user.getPrenom());
+            pst.setString(3, user.getNom());
+            pst.setString(4, user.getEmail());
+            pst.setString(5, user.getGenre());
+            pst.setDate(6, java.sql.Date.valueOf(user.getDate_naissance()));
+            pst.setString(7, user.getNum_tel());
+            pst.setString(8, user.getPassword());
+            pst.setTimestamp(9, java.sql.Timestamp.valueOf(user.getCree_le()));
+            pst.setTimestamp(10, java.sql.Timestamp.valueOf(user.getMis_ajour_le()));
+
+            pst.executeUpdate();
+        }
+    }
 }

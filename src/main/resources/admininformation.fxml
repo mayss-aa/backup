@@ -125,7 +125,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#gocommunity" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="Communauté">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#gomachine" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="Machines">
                     <padding>
                         <Insets left="25.0" />
                     </padding>
@@ -137,7 +137,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#promo" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="PromotionAdmin">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#goproduit" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="Produits">
                     <padding>
                         <Insets left="25.0" />
                     </padding>
@@ -149,6 +149,18 @@
                         </ImageView>
                     </graphic>
                 </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#gostock" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="Stocks">
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/projects.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
                 <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                     <children>
                         <Button fx:id="helpBtn" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button-alt" text="Aide &amp; Support">
