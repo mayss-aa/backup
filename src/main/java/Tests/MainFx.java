@@ -13,12 +13,15 @@ public class MainFx extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/categories_back.fxml"));
+
+        Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+
         // hello
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Add User");
         stage.show();
     }
+
 }
 

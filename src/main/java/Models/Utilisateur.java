@@ -59,6 +59,9 @@ public class Utilisateur {
         this.reset_code_expires_at = reset_code_expires_at;
     }
 
+    public Utilisateur(int id, String email, String password, int roleId) {
+    }
+
     // Getters & Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }

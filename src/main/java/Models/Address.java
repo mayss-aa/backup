@@ -1,6 +1,7 @@
 package Models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Address {
     private int address_id;
@@ -38,6 +39,21 @@ public class Address {
         this.postal_code = postal_code;
         this.country = country;
         this.created_at = created_at;
+    }
+
+    public Address(Utilisateur user, String text, String text1, String text2, String text3, String text4) {
+    }
+
+    public Address(int userId, Object o) {
+    }
+
+    public Address(int userId, String trim, String trim1, String trim2, String trim3, String trim4) {
+    }
+
+    public Address(String trim, String trim1, String trim2, String trim3, String trim4, LocalDate now) {
+    }
+
+    public Address(int i, int id, String text, String text1, String text2, String text3, String text4, LocalDateTime now, Object o) {
     }
 
     // Getters & Setters

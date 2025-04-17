@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefWidth="400" spacing="10" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EditAddressController">
+
+    <Label style="-fx-font-weight: bold; -fx-font-size: 16;" text="Éditer l'adresse" />
+
+    <TextField fx:id="addressLineField" promptText="Adresse" />
+    <TextField fx:id="cityField" promptText="Ville" />
+    <TextField fx:id="stateField" promptText="État" />
+    <TextField fx:id="postalCodeField" promptText="Code postal" />
+    <TextField fx:id="countryField" promptText="Pays" />
+
+    <HBox spacing="10">
+        <Button onAction="#handleCancel" text="Annuler" />
+        <Button fx:id="sauvadd" onAction="#handleSave" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Sauvegarder" />
+    </HBox>
+</VBox>

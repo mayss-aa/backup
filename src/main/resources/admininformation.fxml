@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="731.0" minWidth="1266.0" prefHeight="731.0" prefWidth="1266.0" stylesheets="@2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.admininformation">
+    <left>
+        <VBox prefHeight="731.0" prefWidth="240.0" styleClass="sidebar" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="240.0" styleClass="logo-container">
+                    <children>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Images/logo.png" />
+                            </image>
+                        </ImageView>
+                        <Label prefHeight="32.0" prefWidth="236.0" styleClass="app-title" text="ArdhiSmart">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                </HBox>
+                <VBox alignment="CENTER" prefHeight="140.0" prefWidth="240.0" styleClass="user-profile-sidebar">
+                    <children>
+                        <StackPane>
+                            <children>
+                                <Circle radius="45.0" styleClass="profile-circle" />
+                                <ImageView fx:id="sidebarProfileImage" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@Images/airplan.png" />
+                                    </image>
+                                </ImageView>
+                                <Circle fx:id="statusIndicator" fill="#22c55e" radius="10.0" strokeType="INSIDE" strokeWidth="2.0" StackPane.alignment="BOTTOM_RIGHT">
+                                    <StackPane.margin>
+                                        <Insets bottom="5.0" right="5.0" />
+                                    </StackPane.margin>
+                                    <effect>
+                                        <DropShadow />
+                                    </effect>
+                                </Circle>
+                            </children>
+                        </StackPane>
+                        <Label fx:id="userStatusLabel" styleClass="user-status" text="En ligne" textAlignment="CENTER" />
+                    </children>
+                </VBox>
+                <Separator />
+                <Button fx:id="profileBtn" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#goprofile" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button-active" text="Profil">
+                    <padding>
+                        <Insets left="25.0" />
+                    </padding>
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Images/profile.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="dashboardBtn" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#goutilisateurs" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="Utilisateurs">
+                    <padding>
+                        <Insets left="25.0" />
+                    </padding>
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Images/dashboard.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="messagesBtn" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#goadresses" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="Adresses">
+                    <padding>
+                        <Insets left="25.0" />
+                    </padding>
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/messages.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="projectsBtn" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#gozones" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="Zones">
+                    <padding>
+                        <Insets left="25.0" />
+                    </padding>
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Images/projects.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="calendarBtn" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#goplantes" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="Plantes">
+                    <padding>
+                        <Insets left="25.0" />
+                    </padding>
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Images/calendar.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#gocommunity" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="Communauté">
+                    <padding>
+                        <Insets left="25.0" />
+                    </padding>
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/settings.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#promo" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button" text="PromotionAdmin">
+                    <padding>
+                        <Insets left="25.0" />
+                    </padding>
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/settings.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Button fx:id="helpBtn" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button-alt" text="Aide &amp; Support">
+                            <padding>
+                                <Insets left="25.0" />
+                            </padding>
+                            <graphic>
+                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@icons/help.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="logoutBtn" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#logout" prefHeight="50.0" prefWidth="240.0" styleClass="sidebar-button-alt" text="Déconnexion">
+                            <padding>
+                                <Insets left="25.0" />
+                            </padding>
+                            <graphic>
+                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@icons/logout.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <VBox.margin>
+                                <Insets bottom="15.0" />
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <BorderPane prefHeight="731.0" prefWidth="1026.0" styleClass="content-area" BorderPane.alignment="CENTER">
+            <top>
+                <HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="200.0" styleClass="header-bar" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label styleClass="page-header" text="Tableau de bord">
+                            <HBox.margin>
+                                <Insets left="30.0" />
+                            </HBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Button fx:id="notificationBtn" mnemonicParsing="false" styleClass="icon-button">
+                                    <graphic>
+                                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@icons/notifications.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button fx:id="settingsBtn" mnemonicParsing="false" styleClass="icon-button">
+                                    <graphic>
+                                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@icons/settings-alt.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <StackPane>
+                                    <children>
+                                        <Circle radius="20.0" styleClass="header-profile-circle" />
+                                    </children>
+                                </StackPane>
+                            </children>
+                            <HBox.margin>
+                                <Insets right="30.0" />
+                            </HBox.margin>
+                        </HBox>
+                    </children>
+                </HBox>
+            </top>
+            <center>
+                <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="transparent-background" BorderPane.alignment="CENTER">
+                    <content>
+                        <AnchorPane prefHeight="651.0" prefWidth="1026.0">
+                            <children>
+                                <VBox layoutX="30.0" layoutY="20.0" prefHeight="561.0" prefWidth="966.0" spacing="25.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
+                                    <children>
+                                        <HBox prefHeight="180.0" spacing="20.0">
+                                            <children>
+                                                <VBox prefHeight="200.0" prefWidth="350.0" styleClass="profile-card">
+                                                    <children>
+                                                        <HBox alignment="CENTER" prefHeight="180.0" spacing="20.0">
+                                                            <children>
+                                                                <StackPane>
+                                                                    <children>
+                                                                        <Circle radius="55.0" styleClass="profile-circle-large" />
+                                                                        <ImageView fx:id="mainProfileImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                                                            <clip>
+                                                                                <Circle centerX="50.0" centerY="50.0" radius="50.0" />
+                                                                            </clip>
+                                                                            <image>
+                                                                                <Image url="@Images/default_profile.png" />
+                                                                            </image>
+                                                                        </ImageView>
+                                                                    </children>
+                                                                </StackPane>
+                                                                <VBox alignment="CENTER_LEFT" prefHeight="140.0" prefWidth="180.0" spacing="10.0">
+                                                                    <children>
+                                                                        <Label fx:id="mainUserNameLabel" styleClass="user-name-large" text="Admin ArdhiSmart" />
+                                                                        <Label fx:id="userRoleLabel" styleClass="user-role" text="Administrateur système" />
+                                                                        <HBox spacing="10.0">
+                                                                            <children>
+                                                                                <Button fx:id="changePhotoBtn" mnemonicParsing="false" onAction="#changephoto" styleClass="secondary-button" text="Changer la photo" />
+                                                                            </children>
+                                                                        </HBox>
+                                                                    </children>
+                                                                </VBox>
+                                                            </children>
+                                                            <padding>
+                                                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                            </padding>
+                                                        </HBox>
+                                                    </children>
+                                                </VBox>
+                                                <VBox prefHeight="180.0" prefWidth="575.0" styleClass="profile-card">
+                                                    <children>
+                                                        <HBox prefHeight="50.0">
+                                                            <children>
+                                                                <Label styleClass="card-title" text="Statistiques">
+                                                                    <HBox.margin>
+                                                                        <Insets left="20.0" top="15.0" />
+                                                                    </HBox.margin>
+                                                                </Label>
+                                                                <Label fx:id="progress" styleClass="percentage-label" text="100%">
+                                                                    <HBox.margin>
+                                                                        <Insets left="10.0" top="15.0" />
+                                                                    </HBox.margin>
+                                                                </Label>
+                                                            </children>
+                                                        </HBox>
+                                                        <ProgressBar fx:id="completionProgress" prefHeight="20.0" prefWidth="575.0" progress="1.0" styleClass="profile-progress">
+                                                            <VBox.margin>
+                                                                <Insets left="20.0" right="20.0" />
+                                                            </VBox.margin>
+                                                        </ProgressBar>
+                                                        <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="10.0" prefHeight="85.0" prefWidth="575.0" rowValignment="CENTER" vgap="10.0">
+                                                            <children>
+                                                                <Button fx:id="statsUsersBtn" alignment="CENTER" mnemonicParsing="false" styleClass="action-button" text="Statistiques utilisateurs">
+                                                                    <graphic>
+                                                                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                                                            <image>
+                                                                                <Image url="@icons/personal.png" />
+                                                                            </image>
+                                                                        </ImageView>
+                                                                    </graphic>
+                                                                </Button>
+                                                                <Button fx:id="statsAddressBtn" alignment="CENTER" mnemonicParsing="false" styleClass="action-button" text="Statistiques adresses">
+                                                                    <graphic>
+                                                                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+                                                                    </graphic>
+                                                                </Button>
+                                                            </children>
+                                                        </FlowPane>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                        <TabPane prefHeight="360.0" styleClass="profile-tab-pane">
+                                            <tabs>
+                                                <Tab closable="false" text="Gestion utilisateurs">
+                                                    <content>
+                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                            <!-- Contenu de gestion utilisateurs -->
+                                                        </AnchorPane>
+                                                    </content>
+                                                </Tab>
+                                                <Tab closable="false" text="Gestion adresses">
+                                                    <content>
+                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                            <!-- Contenu de gestion adresses -->
+                                                        </AnchorPane>
+                                                    </content>
+                                                </Tab>
+                                            </tabs>
+                                        </TabPane>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </ScrollPane>
+            </center>
+        </BorderPane>
+    </center>
+</BorderPane>
