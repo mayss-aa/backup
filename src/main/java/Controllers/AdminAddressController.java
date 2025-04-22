@@ -242,7 +242,17 @@ public class AdminAddressController {
     void goprofile(ActionEvent event) throws IOException {
         SceneController.loadPage("/admininformation.fxml");
     }
-
+    @FXML
+    public void goToNote(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/AfficherNote.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void goaddress(ActionEvent event) throws IOException {
         // Add your navigation or business logic here.

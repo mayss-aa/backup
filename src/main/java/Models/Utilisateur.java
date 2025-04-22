@@ -2,6 +2,8 @@ package Models;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Utilisateur {
     private int id;
@@ -61,6 +63,46 @@ public class Utilisateur {
 
     public Utilisateur(int id, String email, String password, int roleId) {
     }
+
+
+    private List<Note> notes = new ArrayList<>();
+
+    public Utilisateur(int Id) {
+
+    }
+
+    public Utilisateur(int utilisateurId, String email) {
+    }
+
+/*
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    // Ensure bidirectional synchronization
+    public void ajouterNote(Note note) {
+        notes.add(note);
+        note.setUtilisateur(this); // Link the note to this user
+    }
+
+    public void supprimerNote(Note note) {
+        notes.remove(note);
+        note.setUtilisateur(null); // Unlink the note
+    }
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }
+
+    public void ajouterNote(Note note) {
+        notes.add(note);
+        note.setUtilisateur(this);
+    }
+
+    public void supprimerNote(Note note) {
+        notes.remove(note);
+    }
+*/
+
 
     // Getters & Setters
     public int getId() { return id; }

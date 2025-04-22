@@ -87,7 +87,17 @@ public class admininformation {
 
 
 
-
+    @FXML
+    public void goToNote(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/AfficherNote.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     private void gomachine(ActionEvent event) {
