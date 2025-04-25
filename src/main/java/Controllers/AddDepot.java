@@ -35,17 +35,31 @@ public class AddDepot {
         String type = typeStockageCombo.getValue();
         String statut = statutCombo.getValue();
 
+        // Vérification des champs vides
         if (nom.isEmpty() || localisation.isEmpty() || capaciteStr.isEmpty()
                 || unite.isEmpty() || type == null || statut == null) {
             showAlert(AlertType.WARNING, "Champs manquants", "Veuillez remplir tous les champs.");
             return;
         }
 
+        // Vérification que le nom contient uniquement des lettres et espaces
+        if (!nom.matches("[a-zA-ZÀ-ÿ\\s]+")) {
+            showAlert(AlertType.WARNING, "Nom invalide", "Le nom ne doit contenir que des lettres.");
+            return;
+        }
+
+        // Vérification que l’unité contient uniquement des lettres
+        if (!unite.matches("[a-zA-ZÀ-ÿ]+")) {
+            showAlert(AlertType.WARNING, "Unité invalide", "L'unité ne doit contenir que des lettres.");
+            return;
+        }
+
+        // Vérification que la capacité est un entier positif
         int capacite;
         try {
             capacite = Integer.parseInt(capaciteStr);
             if (capacite < 0) {
-                showAlert(AlertType.WARNING, "Capacité invalide", "La capacité ne peut pas être négative.");
+                showAlert(AlertType.WARNING, "Capacité invalide", "La capacité doit être un entier positif.");
                 return;
             }
         } catch (NumberFormatException e) {
@@ -53,6 +67,7 @@ public class AddDepot {
             return;
         }
 
+        // Enregistrement si tout est valide
         try {
             Depot depot = new Depot(nom, localisation, capacite, unite, type, statut);
             depotService.insert(depot);
@@ -85,7 +100,7 @@ public class AddDepot {
         Platform.runLater(() -> {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-                nomDepotField.getScene().setRoot(root); // remplace tout le contenu
+                nomDepotField.getScene().setRoot(root);
             } catch (IOException e) {
                 showAlert(AlertType.ERROR, "Erreur", "Chargement échoué : " + e.getMessage());
             }

@@ -5,7 +5,9 @@ import Utils.MyDb;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RessourceService implements IDepotRessource<Ressource> {
     private Connection con;
@@ -85,4 +87,14 @@ public class RessourceService implements IDepotRessource<Ressource> {
         return ids;
     }
 
+    public Map<String, Integer> getDepotNomToIdMap() throws SQLException {
+        Map<String, Integer> map = new HashMap<>();
+        String sql = "SELECT id, nom_depot FROM depot";
+        Statement stmt = this.con.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            map.put(rs.getString("nom_depot"), rs.getInt("id"));
+        }
+        return map;
+    }
 }

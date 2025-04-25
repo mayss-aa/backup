@@ -58,18 +58,40 @@ public class EditDepot implements Initializable {
     @FXML
     private void handleOk() {
         try {
-            String nom = nomDepotField.getText();
-            String localisation = localisationField.getText();
-            int capacite = Integer.parseInt(capaciteField.getText());
+            String nom = nomDepotField.getText().trim();
+            String localisation = localisationField.getText().trim();
+            String capaciteStr = capaciteField.getText().trim();
             String unite = uniteCapCombo.getValue();
             String type = typeStockageCombo.getValue();
             String statut = statutCombo.getValue();
 
-            if (nom.isEmpty() || localisation.isEmpty() || unite == null || type == null || statut == null) {
+            // ✅ Champs obligatoires
+            if (nom.isEmpty() || localisation.isEmpty() || capaciteStr.isEmpty() ||
+                    unite == null || type == null || statut == null) {
                 showAlert(Alert.AlertType.ERROR, "Tous les champs doivent être remplis !");
                 return;
             }
 
+            // ✅ Vérification nom : lettres uniquement
+            if (!nom.matches("[a-zA-ZÀ-ÿ\\s]+")) {
+                showAlert(Alert.AlertType.ERROR, "Le nom ne doit contenir que des lettres.");
+                return;
+            }
+
+            // ✅ Vérification capacité : entier positif
+            int capacite;
+            try {
+                capacite = Integer.parseInt(capaciteStr);
+                if (capacite < 0) {
+                    showAlert(Alert.AlertType.ERROR, "La capacité doit être un entier positif.");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                showAlert(Alert.AlertType.ERROR, "Capacité doit être un nombre entier.");
+                return;
+            }
+
+            // ✅ Mise à jour des données
             depot.setNom_depot(nom);
             depot.setLocalisation_depot(localisation);
             depot.setCapacite_depot(capacite);
@@ -80,8 +102,6 @@ public class EditDepot implements Initializable {
             depotService.update(depot);
             closeWindow();
 
-        } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "Capacité doit être un nombre entier.");
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Erreur SQL : " + e.getMessage());
         }

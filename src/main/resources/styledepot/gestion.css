@@ -8,17 +8,13 @@
 }
 
 /* === Conteneur principal centré === */
-.main-container, .centered-container {
-    -fx-alignment: center;
+.main-container {
     -fx-padding: 30px;
     -fx-background-color: #ffffff;
     -fx-border-radius: 12px;
     -fx-background-radius: 12px;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 12, 0.3, 0, 4);
-    -fx-max-width: 600px;
-    -fx-max-height: 550px;
-    -fx-translate-x: 50%;
-    -fx-translate-y: 50%;
+    -fx-spacing: 20px;
 }
 
 /* === Zone d’en-tête === */
@@ -498,4 +494,79 @@
 
 .danger-button:hover {
     -fx-background-color: rgba(231, 76, 60, 0.2);
+}
+/* === Boutons liés à la ListView === */
+.list-action-button {
+    -fx-background-color: linear-gradient(to right, #66bb6a, #43a047);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0.3, 0, 2);
+}
+
+.list-action-button:hover {
+    -fx-background-color: #388e3c;
+}
+
+/* Bouton Modifier spécifique */
+.list-edit-button {
+    -fx-background-color: linear-gradient(to right, #42a5f5, #1e88e5);
+}
+
+.list-edit-button:hover {
+    -fx-background-color: #1565c0;
+}
+
+/* Bouton Supprimer spécifique */
+.list-delete-button {
+    -fx-background-color: linear-gradient(to right, #ef5350, #e53935);
+}
+
+.list-delete-button:hover {
+    -fx-background-color: #c62828;
+}
+
+/* 🌿 Amélioration affichage ListView */
+.list-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #c8e6c9;
+    -fx-border-radius: 10px;
+    -fx-padding: 15px;
+    -fx-font-family: "Segoe UI", "Roboto", sans-serif;
+    -fx-font-size: 15px;
+    -fx-cell-horizontal-margin: 12px;
+    -fx-cell-vertical-margin: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 10, 0.3, 0, 3);
+}
+
+.list-cell {
+    -fx-background-color: #fafafa;
+    -fx-background-radius: 8px;
+    -fx-padding: 12 16;
+    -fx-border-color: #e0f2f1;
+    -fx-border-width: 1;
+    -fx-border-radius: 8px;
+    -fx-margin: 5;
+}
+
+/* Sélection douce */
+.list-cell:selected {
+    -fx-background-color: #e8f5e9;
+    -fx-text-fill: #2e7d32;
+    -fx-font-weight: bold;
+}
+
+/* Hover doux */
+.list-cell:hover {
+    -fx-background-color: #f1f8e9;
+    -fx-cursor: hand;
+}
+
+/* Texte interne plus clair */
+.list-cell .label {
+    -fx-text-fill: #2c3e50;
+    -fx-wrap-text: true;
 }

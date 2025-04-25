@@ -8,8 +8,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import java.net.URL?>
-
 <?import javafx.collections.FXCollections?>
+
 <BorderPane xmlns="http://javafx.com/javafx/23.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="Controllers.ListDepot">
@@ -54,19 +54,21 @@
             <!-- Navigation -->
             <VBox spacing="0" VBox.vgrow="ALWAYS">
                 <VBox spacing="0">
-                    <Button text="Profil" styleClass="sidebar-button" prefWidth="240"><padding><Insets left="25"/></padding></Button>
-                    <Button text="Utilisateurs" styleClass="sidebar-button" prefWidth="240"><padding><Insets left="25"/></padding></Button>
-                    <Button text="Adresses" styleClass="sidebar-button" prefWidth="240"><padding><Insets left="25"/></padding></Button>
-                    <Button text="Zones" styleClass="sidebar-button" prefWidth="240"><padding><Insets left="25"/></padding></Button>
-                    <Button text="Plantes" styleClass="sidebar-button" prefWidth="240"><padding><Insets left="25"/></padding></Button>
-                    <Button text="Communauté" styleClass="sidebar-button" prefWidth="240"><padding><Insets left="25"/></padding></Button>
-                    <Button text="Ressources" onAction="#goToRessource" styleClass="sidebar-button" prefWidth="240"><padding><Insets left="25"/></padding></Button>
-                    <Button text="Dépôts" onAction="#goToDepot" styleClass="sidebar-button-active" prefWidth="240"><padding><Insets left="25"/></padding></Button>
+                    <Button text="Profil" styleClass="sidebar-button" prefWidth="240"/>
+                    <Button text="Utilisateurs" styleClass="sidebar-button" prefWidth="240"/>
+                    <Button text="Adresses" styleClass="sidebar-button" prefWidth="240"/>
+                    <Button text="Zones" styleClass="sidebar-button" prefWidth="240"/>
+                    <Button text="Plantes" styleClass="sidebar-button" prefWidth="240"/>
+                    <Button text="Communauté" styleClass="sidebar-button" prefWidth="240"/>
+                    <Button text="Ressources" onAction="#goToRessource" styleClass="sidebar-button" prefWidth="240"/>
+                    <Button text="Dépôts" onAction="#goToDepot" styleClass="sidebar-button-active" prefWidth="240"/>
                 </VBox>
                 <Pane VBox.vgrow="ALWAYS"/>
                 <VBox>
-                    <Button text="Aide &amp;Support" styleClass="sidebar-button-alt" prefWidth="240"><padding><Insets left="25"/></padding></Button>
-                    <Button text="Déconnexion" styleClass="sidebar-button-alt" prefWidth="240"><padding><Insets left="25"/></padding><VBox.margin><Insets bottom="15"/></VBox.margin></Button>
+                    <Button text="Aide &amp;Support" styleClass="sidebar-button-alt" prefWidth="240"/>
+                    <Button text="Déconnexion" styleClass="sidebar-button-alt" prefWidth="240">
+                        <VBox.margin><Insets bottom="15"/></VBox.margin>
+                    </Button>
                 </VBox>
             </VBox>
         </VBox>
@@ -74,7 +76,7 @@
 
     <!-- Contenu principal -->
     <center>
-        <VBox alignment="TOP_CENTER" spacing="20" styleClass="main-container">
+        <VBox alignment="TOP_CENTER" spacing="20" styleClass="main-container" VBox.vgrow="ALWAYS">
 
             <!-- En-tête -->
             <StackPane styleClass="header-container">
@@ -83,10 +85,10 @@
 
             <!-- Boutons d'action -->
             <HBox alignment="CENTER" spacing="15" styleClass="action-container">
-                <Button text="+ Ajouter un Dépôt" onAction="#handleAddDepot" />
-                <Button text="🔁 Rafraîchir" onAction="#handleRefresh" />
-                <Button text="✏ Modifier" onAction="#handleEditDepot" />
-                <Button text="🗑️ Supprimer" onAction="#handleDeleteDepot" />
+                <Button text=" Ajouter un Dépôt" onAction="#handleAddDepot" styleClass="list-action-button"/>
+                <Button text=" Modifier" onAction="#handleEditDepot" styleClass="list-action-button list-edit-button"/>
+                <Button text="Supprimer" onAction="#handleDeleteDepot" styleClass="list-action-button list-delete-button"/>
+
             </HBox>
 
             <!-- Barre de recherche -->
@@ -96,8 +98,9 @@
             </HBox>
 
             <!-- Liste des dépôts -->
-            <ListView fx:id="ListViewDepot" prefHeight="500.0" prefWidth="900.0">
-                <items>
+            <ListView fx:id="ListViewDepot" VBox.vgrow="ALWAYS" styleClass="list-view">
+
+            <items>
                     <FXCollections fx:factory="observableArrayList"/>
                 </items>
             </ListView>
