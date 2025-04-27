@@ -36,3 +36,9 @@ build/
 
 ### Mac OS ###
 .DS_Store
+# Ignorer les fichiers Maven compilés
+/target/
+
+# Ignorer les fichiers IntelliJ
+.idea/
+*.iml
